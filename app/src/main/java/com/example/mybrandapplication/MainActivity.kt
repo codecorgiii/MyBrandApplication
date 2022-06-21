@@ -2,6 +2,7 @@ package com.example.mybrandapplication
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var argbRedComponentLabel: TextView
     private lateinit var argbGreenComponentLabel: TextView
     private lateinit var argbBlueComponentLabel: TextView
+    private lateinit var recreateActivityButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         argbGreenComponentLabel = findViewById(R.id.argb_green_component_label)
         argbBlueComponentLabel = findViewById(R.id.argb_blue_component_label)
         updateArgbLabels(currentColor)
+
+        recreateActivityButton = findViewById(R.id.recreate_activity_button)
+        recreateActivityButton.setOnClickListener {
+            this.recreate()
+        }
 
         argbColorPreview.setOnClickListener {
             ColorPickerDialog.Builder(this, currentColor).setOnColorPickedListener { color ->
