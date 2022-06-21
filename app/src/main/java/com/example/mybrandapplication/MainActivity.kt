@@ -1,11 +1,11 @@
 package com.example.mybrandapplication
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
 import wang.relish.colorpicker.ColorPickerDialog
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sharedPreferencesBrandColor = fetchBrandColorFromSharedPreferences(this)
+        if (sharedPreferencesBrandColor != null) {
+            currentColor = sharedPreferencesBrandColor
+        }
+
         argbColorPreview = findViewById(R.id.argb_color_preview)
         argbColorPreview.setBackgroundColor(currentColor)
 
@@ -34,10 +39,11 @@ class MainActivity : AppCompatActivity() {
 
         argbColorPreview.setOnClickListener {
             ColorPickerDialog.Builder(this, currentColor).setOnColorPickedListener { color ->
-                    currentColor = color
-                    updateArgbColorPreview(currentColor)
-                    updateArgbLabels(currentColor)
-                }.build().show()
+                currentColor = color
+                updateArgbColorPreview(currentColor)
+                updateArgbLabels(currentColor)
+                storeBrandColorInSharedPreferences(this, currentColor)
+            }.build().show()
         }
     }
 
