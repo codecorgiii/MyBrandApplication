@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My Brand Application</string>
+    <string name="rgba_alpha">Alpha: %1$s</string>
+    <string name="rgba_red">Red: %1$s</string>
+    <string name="rgba_green">Green: %1$s</string>
+    <string name="rgba_blue">Blue: %1$s</string>
 </resources>

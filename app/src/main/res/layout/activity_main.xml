@@ -6,13 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:id="@+id/argb_color_preview"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/black" />
+
     <TextView
+        android:id="@+id/argb_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/argb_color_preview"
+        app:layout_constraintTop_toTopOf="@id/argb_color_preview"
+        tools:text="#00000000" />
 
+    <TextView
+        android:id="@+id/argb_alpha_component_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/argb_color_preview"
+        app:layout_constraintTop_toBottomOf="@id/argb_label"
+        tools:text="Alpha: 00" />
+
+    <TextView
+        android:id="@+id/argb_red_component_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/argb_color_preview"
+        app:layout_constraintTop_toBottomOf="@id/argb_alpha_component_label"
+        tools:text="Red: 00" />
+
+    <TextView
+        android:id="@+id/argb_green_component_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/argb_color_preview"
+        app:layout_constraintTop_toBottomOf="@id/argb_red_component_label"
+        tools:text="Green: 00" />
+
+    <TextView
+        android:id="@+id/argb_blue_component_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/argb_color_preview"
+        app:layout_constraintTop_toBottomOf="@id/argb_green_component_label"
+        tools:text="Blue: 00" />
 </androidx.constraintlayout.widget.ConstraintLayout>
