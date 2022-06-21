@@ -56,8 +56,7 @@ class MainActivity : AppCompatActivity() {
         val redComponentHexString = String.format("%02X", color.red)
         val greenComponentHexString = String.format("%02X", color.green)
         val blueComponentHexString = String.format("%02X", color.blue)
-        val argbHexString =
-            "#$alphaComponentHexString$redComponentHexString$greenComponentHexString$blueComponentHexString"
+        val argbHexString = "#${color.toArgbHexString()}"
 
         argbLabel.text = argbHexString
         argbAlphaComponentLabel.text =
@@ -74,16 +73,4 @@ class MainActivity : AppCompatActivity() {
         const val INITIAL_COLOR = Color.BLACK
     }
 }
-
-inline val Int.alpha: Int
-    get() = (this shr 24) and 0xff
-
-inline val Int.red: Int
-    get() = (this shr 16) and 0xff
-
-inline val Int.green: Int
-    get() = (this shr 8) and 0xff
-
-inline val Int.blue: Int
-    get() = this and 0xff
 
