@@ -1,7 +1,9 @@
 package com.example.mybrandapplication
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -26,10 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPreferencesBrandColor = getBrandColorFromSharedPreferences(this)
-        if (sharedPreferencesBrandColor != null) {
-            currentColor = sharedPreferencesBrandColor
-        }
+        currentColor = getColorPrimaryFromCurrentContextTheme(this)
 
         argbColorPreview = findViewById(R.id.argb_color_preview)
         argbColorPreview.setBackgroundColor(currentColor)
@@ -47,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         brandThemeOverlayEnabledSwitch = findViewById(R.id.brand_theme_overlay_enabled_switch)
+        brandThemeOverlayEnabledSwitch.isChecked = isBrandThemeOverlayEnabled(this)
         brandThemeOverlayEnabledSwitch.setOnCheckedChangeListener { _, isChecked ->
             setBrandThemeOverlayEnabled(this@MainActivity, isChecked)
         }
@@ -80,6 +80,15 @@ class MainActivity : AppCompatActivity() {
             resources.getString(R.string.rgba_green, greenComponentHexString)
         argbBlueComponentLabel.text =
             resources.getString(R.string.rgba_blue, blueComponentHexString)
+    }
+
+
+    // 2nd answer in https://stackoverflow.com/questions/27611173/how-to-get-accent-color-programmatically
+    @ColorInt
+    private fun getColorPrimaryFromCurrentContextTheme(context: Context): Int {
+        val outTypedValue = TypedValue()
+        context.theme.resolveAttribute(com.google.android.material.R.attr.colorPrimary, outTypedValue, true)
+        return outTypedValue.data
     }
 
     companion object {
