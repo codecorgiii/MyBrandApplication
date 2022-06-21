@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.switchmaterial.SwitchMaterial
 import wang.relish.colorpicker.ColorPickerDialog
 
 class MainActivity : AppCompatActivity() {
@@ -19,12 +20,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var argbGreenComponentLabel: TextView
     private lateinit var argbBlueComponentLabel: TextView
     private lateinit var recreateActivityButton: Button
+    private lateinit var brandThemeOverlayEnabledSwitch: SwitchMaterial
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPreferencesBrandColor = fetchBrandColorFromSharedPreferences(this)
+        val sharedPreferencesBrandColor = getBrandColorFromSharedPreferences(this)
         if (sharedPreferencesBrandColor != null) {
             currentColor = sharedPreferencesBrandColor
         }
@@ -44,12 +46,17 @@ class MainActivity : AppCompatActivity() {
             this.recreate()
         }
 
+        brandThemeOverlayEnabledSwitch = findViewById(R.id.brand_theme_overlay_enabled_switch)
+        brandThemeOverlayEnabledSwitch.setOnCheckedChangeListener { _, isChecked ->
+            setBrandThemeOverlayEnabled(this@MainActivity, isChecked)
+        }
+
         argbColorPreview.setOnClickListener {
             ColorPickerDialog.Builder(this, currentColor).setOnColorPickedListener { color ->
                 currentColor = color
                 updateArgbColorPreview(currentColor)
                 updateArgbLabels(currentColor)
-                storeBrandColorInSharedPreferences(this, currentColor)
+                setBrandColorInSharedPreferences(this, currentColor)
             }.build().show()
         }
     }

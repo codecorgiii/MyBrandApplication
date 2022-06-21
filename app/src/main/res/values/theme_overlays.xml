@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BrandThemeOverlay" parent="">
+        <item name="colorPrimary">@color/runtime_brand_color</item>
+    </style>
+</resources>

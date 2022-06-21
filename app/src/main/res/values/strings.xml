@@ -5,4 +5,5 @@
     <string name="rgba_green">Green: %1$s</string>
     <string name="rgba_blue">Blue: %1$s</string>
     <string name="recreate_activity">Recreate Activity</string>
+    <string name="brand_theme_overlay_enabled">BrandThemeOverlay enabled?</string>
 </resources>

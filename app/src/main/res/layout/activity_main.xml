@@ -72,19 +72,38 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/argb_blue_component_label" />
 
     <Button
         android:id="@+id/recreate_activity_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/recreate_activity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        android:text="@string/recreate_activity" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    <TextView
+        android:id="@+id/brand_theme_overlay_enabled_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/brand_theme_overlay_enabled"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/brand_theme_overlay_enabled_switch"
+        app:layout_constraintStart_toStartOf="@id/recreate_activity_button"
+        app:layout_constraintTop_toTopOf="@id/brand_theme_overlay_enabled_switch" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/brand_theme_overlay_enabled_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@id/brand_theme_overlay_enabled_label"
+        app:layout_constraintTop_toBottomOf="@id/recreate_activity_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

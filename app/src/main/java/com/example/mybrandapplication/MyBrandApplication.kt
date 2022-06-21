@@ -5,14 +5,37 @@ import android.app.Application
 import android.os.Bundle
 import android.util.Log
 
-class MyBrandApplication: Application() {
+class MyBrandApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
                 super.onActivityPreCreated(activity, savedInstanceState)
-                val brandColor = fetchBrandColorFromSharedPreferences(activity)
-                Log.d(TAG, "onActivityPreCreated (${activity.javaClass.simpleName}), brandColor: ${brandColor?.toArgbHexString()}")
+                val logMsgPrefix = "onActivityPreCreated (${activity.javaClass.simpleName}),"
+
+                val brandColor = getBrandColorFromSharedPreferences(activity)
+                Log.d(TAG, "$logMsgPrefix brandColor: ${brandColor?.toArgbHexString()}")
+
+                val colorReplacementMap = brandColor?.let {
+                    createColorReplacementMap(
+                        R.color.runtime_brand_color,
+                        it
+                    )
+                }
+                Log.d(TAG, "$logMsgPrefix colorReplacementMap: $colorReplacementMap")
+
+                val resourceLoaderAdded = colorReplacementMap?.let {
+                    addResourcesLoaderToContext(activity, it)
+                } ?: false
+                Log.d(TAG, "$logMsgPrefix resourceLoaderAdded: $resourceLoaderAdded")
+
+                val brandThemeOverlayEnabled = isBrandThemeOverlayEnabled(activity)
+                Log.d(TAG, "$logMsgPrefix brandThemeOverlayEnabled: $brandThemeOverlayEnabled")
+
+                if (resourceLoaderAdded && brandThemeOverlayEnabled) {
+                    Log.d(TAG, "$logMsgPrefix BrandThemeOverlay applied")
+                    activity.theme.applyStyle(R.style.BrandThemeOverlay, true)
+                }
             }
 
             // No-ops
